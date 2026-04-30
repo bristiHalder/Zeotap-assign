@@ -1,0 +1,71 @@
+[
+  {
+    "component_id": "RDBMS_PRIMARY_01",
+    "component_type": "RDBMS",
+    "message": "Connection pool exhausted - max connections reached (100/100)",
+    "payload": {
+      "error_code": "CONN_POOL_EXHAUSTED",
+      "active_connections": 100,
+      "max_connections": 100,
+      "waiting_queries": 247,
+      "host": "db-primary-01.internal",
+      "region": "us-east-1"
+    }
+  },
+  {
+    "component_id": "MCP_HOST_ALPHA",
+    "component_type": "MCP",
+    "message": "Tool execution timeout: database_query tool unresponsive after 30s",
+    "payload": {
+      "tool_name": "database_query",
+      "timeout_ms": 30000,
+      "host": "mcp-alpha.internal",
+      "context_id": "ctx-789abc"
+    }
+  },
+  {
+    "component_id": "CACHE_CLUSTER_01",
+    "component_type": "CACHE",
+    "message": "Cache miss rate exceeded 85% threshold - possible cold start",
+    "payload": {
+      "miss_rate": 0.87,
+      "hit_rate": 0.13,
+      "eviction_rate": 12000,
+      "memory_used_mb": 15800,
+      "memory_max_mb": 16384
+    }
+  },
+  {
+    "component_id": "QUEUE_EVENTS_01",
+    "component_type": "QUEUE",
+    "message": "Consumer lag exceeded 50000 messages on partition 3",
+    "payload": {
+      "topic": "events.user-actions",
+      "partition": 3,
+      "consumer_lag": 52341,
+      "consumer_group": "event-processor"
+    }
+  },
+  {
+    "component_id": "API_GATEWAY_01",
+    "component_type": "API",
+    "message": "HTTP 503 rate: 45% of requests in last 60s",
+    "payload": {
+      "error_rate": 0.45,
+      "total_requests_1m": 15000,
+      "p99_latency_ms": 12500,
+      "sla_latency_ms": 500
+    }
+  },
+  {
+    "component_id": "NOSQL_CLUSTER_01",
+    "component_type": "NOSQL",
+    "message": "Write operation timeout on collection: user_sessions",
+    "payload": {
+      "operation": "insert",
+      "collection": "user_sessions",
+      "timeout_ms": 10000,
+      "replica_set": "rs0"
+    }
+  }
+]
