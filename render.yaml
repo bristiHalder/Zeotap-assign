@@ -32,4 +32,3 @@ databases:
 redis:
   - name: ims-redis
     plan: free
-    ipAllowList: [] # Only allow internal connections
