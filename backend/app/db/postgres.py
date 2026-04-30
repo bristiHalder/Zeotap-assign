@@ -8,6 +8,7 @@ import logging
 from typing import Optional
 
 import asyncpg
+from urllib.parse import urlparse
 
 from app.config import settings
 
@@ -21,12 +22,25 @@ async def get_pool() -> asyncpg.Pool:
     """Get or create the connection pool."""
     global _pool
     if _pool is None:
-        _pool = await asyncpg.create_pool(
-            settings.POSTGRES_URL,
-            min_size=5,
-            max_size=20,
-            command_timeout=30,
-        )
+        try:
+            # Mask sensitive info for logging
+            if settings.POSTGRES_URL:
+                parsed = urlparse(settings.POSTGRES_URL)
+                masked_url = f"{parsed.scheme}://{parsed.username}:****@{parsed.hostname}:{parsed.port}{parsed.path}"
+                logger.info(f"Connecting to PostgreSQL at {masked_url}")
+            else:
+                logger.error("POSTGRES_URL is empty!")
+
+            _pool = await asyncpg.create_pool(
+                settings.POSTGRES_URL,
+                min_size=5,
+                max_size=20,
+                command_timeout=60,
+            )
+            logger.info("PostgreSQL pool created successfully")
+        except Exception as e:
+            logger.error(f"Failed to connect to PostgreSQL: {str(e)}")
+            raise e
     return _pool
 
 
