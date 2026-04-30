@@ -1,8 +1,4 @@
-"""
-Centralized configuration via pydantic-settings.
-All values are configurable via environment variables.
-"""
-
+import os
 from pydantic import Field
 from pydantic_settings import BaseSettings
 
@@ -47,3 +43,10 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+# Startup verification logs
+print(f"DEBUG: Initialized with POSTGRES_URL mask: {settings.POSTGRES_URL[:15]}...")
+if os.environ.get("DATABASE_URL"):
+    print("DEBUG: Found DATABASE_URL in environment")
+else:
+    print("DEBUG: DATABASE_URL NOT FOUND in environment")
