@@ -25,6 +25,7 @@ services:
   - type: redis
     name: ims-redis
     plan: free
+    ipAllowList: []
 
 # Databases
 databases:
