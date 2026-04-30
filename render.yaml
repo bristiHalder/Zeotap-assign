@@ -21,6 +21,10 @@ services:
         sync: false # Set this manually in Render dashboard to your MongoDB Atlas URL
       - key: FRONTEND_URL
         value: https://your-vercel-app.vercel.app # Change this to your Vercel URL
+  # Redis Service
+  - type: redis
+    name: ims-redis
+    plan: free
 
 # Databases
 databases:
@@ -28,7 +32,3 @@ databases:
     plan: free
     postgresMajorVersion: 16
 
-# Redis
-redis:
-  - name: ims-redis
-    plan: free
