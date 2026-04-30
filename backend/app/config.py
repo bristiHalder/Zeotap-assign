@@ -3,15 +3,28 @@ Centralized configuration via pydantic-settings.
 All values are configurable via environment variables.
 """
 
+from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     # Database URLs
-    MONGODB_URL: str = "mongodb://mongodb:27017"
+    # validation_alias allows Pydantic to look for multiple env var names
+    MONGODB_URL: str = Field(
+        default="mongodb://mongodb:27017",
+        validation_alias="MONGODB_URL"
+    )
     MONGODB_DB_NAME: str = "ims_datalake"
-    POSTGRES_URL: str = "postgresql://ims_user:ims_password@postgres:5432/ims_db"
-    REDIS_URL: str = "redis://redis:6379/0"
+    
+    POSTGRES_URL: str = Field(
+        default="postgresql://ims_user:ims_password@postgres:5432/ims_db",
+        validation_alias="DATABASE_URL" # Railway's default
+    )
+    
+    REDIS_URL: str = Field(
+        default="redis://redis:6379/0",
+        validation_alias="REDIS_URL"
+    )
 
     # Ingestion tuning
     RATE_LIMIT_RPS: int = 5000
@@ -30,6 +43,7 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+        extra = "ignore"
 
 
 settings = Settings()
