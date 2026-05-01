@@ -118,8 +118,17 @@ export default function Dashboard() {
             ))}
             <div style={{ width: 1, height: 20, background: 'var(--border-color)', margin: '0 4px' }} />
             <button 
-              className="btn btn-sm btn-primary" 
-              style={{ background: 'var(--accent-color)', borderColor: 'var(--accent-color)' }}
+              className="btn btn-sm" 
+              style={{ 
+                background: '#007bff', 
+                color: 'white',
+                fontWeight: 'bold',
+                padding: '4px 12px',
+                borderRadius: '4px',
+                border: 'none',
+                cursor: 'pointer',
+                marginLeft: '8px'
+              }}
               onClick={async () => {
                 const signal = {
                   component_id: `comp-${Math.floor(Math.random() * 5) + 1}`,
