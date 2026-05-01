@@ -1,5 +1,4 @@
-const rawUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-const API_BASE = rawUrl.startsWith('http://localhost') ? rawUrl : rawUrl.replace(/^http:/, 'https:');
+const API_BASE = 'https://zeotap-assign-production.up.railway.app';
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
