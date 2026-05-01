@@ -104,7 +104,7 @@ export default function Dashboard() {
           }}
         >
           <h3 style={{ fontSize: 15, fontWeight: 600 }}>Active Incidents</h3>
-          <div className="filter-bar" style={{ display: 'flex', gap: 6 }}>
+          <div className="filter-bar" style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
             {['', 'OPEN', 'INVESTIGATING', 'RESOLVED', 'CLOSED'].map((s) => (
               <button
                 key={s}
@@ -116,6 +116,29 @@ export default function Dashboard() {
                 {s || 'All'}
               </button>
             ))}
+            <div style={{ width: 1, height: 20, background: 'var(--border-color)', margin: '0 4px' }} />
+            <button 
+              className="btn btn-sm btn-primary" 
+              style={{ background: 'var(--accent-color)', borderColor: 'var(--accent-color)' }}
+              onClick={async () => {
+                const signal = {
+                  component_id: `comp-${Math.floor(Math.random() * 5) + 1}`,
+                  signal_type: ['CPU_HIGH', 'MEMORY_LOW', 'LATENCY_SPIKE', 'ERROR_RATE_HIGH'][Math.floor(Math.random() * 4)],
+                  value: Math.floor(Math.random() * 100),
+                  timestamp: new Date().toISOString(),
+                  metadata: { simulated: true }
+                };
+                try {
+                  await api.ingestSignal(signal);
+                  alert(`Signal sent: ${signal.signal_type} for ${signal.component_id}`);
+                  loadData();
+                } catch (e) {
+                  alert("Failed to send signal. Check console for details.");
+                }
+              }}
+            >
+              Simulate Signal
+            </button>
           </div>
         </div>
 
