@@ -146,7 +146,7 @@ export default function Dashboard() {
                 }
               }}
             >
-              Simulate Signal
+              🚀 TEST INGESTION
             </button>
           </div>
         </div>
