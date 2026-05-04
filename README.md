@@ -2,6 +2,15 @@
 
 A production-grade Incident Management System designed to monitor complex distributed infrastructure (APIs, MCP Hosts, Distributed Caches, Async Queues, RDBMS, and NoSQL stores) and manage failure mediation workflows.
 
+## 🌐 Live Deployment
+
+| Service | URL |
+|---------|-----|
+| **Dashboard** | [https://project-g6m6a.vercel.app](https://project-g6m6a.vercel.app) |
+| **Backend API** | [https://zeotap-assign-production.up.railway.app](https://zeotap-assign-production.up.railway.app) |
+| **API Docs (Swagger)** | [https://zeotap-assign-production.up.railway.app/docs](https://zeotap-assign-production.up.railway.app/docs) |
+| **Health Check** | [https://zeotap-assign-production.up.railway.app/health](https://zeotap-assign-production.up.railway.app/health) |
+
 ## Architecture Diagram
 
 ```
@@ -43,7 +52,7 @@ A production-grade Incident Management System designed to monitor complex distri
 | NoSQL | MongoDB 7 | Data Lake (Raw Signals) — Audit Log |
 | Cache | Redis 7 | Hot-path dashboard, debouncing, pub/sub |
 | Frontend | React + Vite | Real-time incident dashboard |
-| Infra | Docker Compose | Single-command deployment |
+| Infra | Railway + Vercel + Docker | Cloud deployment (Backend on Railway, Frontend on Vercel) |
 
 ## Quick Start
 
@@ -54,15 +63,17 @@ A production-grade Incident Management System designed to monitor complex distri
 
 ```bash
 # Clone and start
-git clone https://github.com/bristiHalder/Zeotap-Assignment.git
-cd Zeotap-Assignment
+git clone https://github.com/bristiHalder/Zeotap-assign.git
+cd Zeotap-assign
 docker compose up --build
 ```
 
 **Access:**
-- 🌐 Dashboard: http://localhost:3000
+- 🌐 Dashboard: http://localhost:5173
 - 📡 API Docs: http://localhost:8000/docs
 - ❤️ Health: http://localhost:8000/health
+
+> **Note:** The system is also deployed live — see [Live Deployment](#-live-deployment) above.
 
 ### Run Failure Simulation
 
