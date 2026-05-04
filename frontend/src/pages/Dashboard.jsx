@@ -130,19 +130,29 @@ export default function Dashboard() {
                 marginLeft: '8px'
               }}
               onClick={async () => {
+                const types = ['API', 'MCP', 'CACHE', 'QUEUE', 'RDBMS', 'NOSQL'];
+                const messages = [
+                  'High CPU utilization detected',
+                  'Memory threshold exceeded',
+                  'Latency spike observed',
+                  'Error rate above threshold',
+                  'Connection pool exhausted',
+                  'Disk I/O saturation detected',
+                ];
+                const idx = Math.floor(Math.random() * types.length);
                 const signal = {
-                  component_id: `comp-${Math.floor(Math.random() * 5) + 1}`,
-                  signal_type: ['CPU_HIGH', 'MEMORY_LOW', 'LATENCY_SPIKE', 'ERROR_RATE_HIGH'][Math.floor(Math.random() * 4)],
-                  value: Math.floor(Math.random() * 100),
+                  component_id: `${types[idx]}_CLUSTER_${String(Math.floor(Math.random() * 5) + 1).padStart(2, '0')}`,
+                  component_type: types[idx],
+                  message: messages[idx],
+                  payload: { value: Math.floor(Math.random() * 100), simulated: true },
                   timestamp: new Date().toISOString(),
-                  metadata: { simulated: true }
                 };
                 try {
                   await api.ingestSignal(signal);
-                  alert(`Signal sent: ${signal.signal_type} for ${signal.component_id}`);
+                  alert(`✅ Signal sent: ${signal.component_type} — ${signal.message}`);
                   loadData();
                 } catch (e) {
-                  alert("Failed to send signal. Check console for details.");
+                  alert("Failed to send signal: " + e.message);
                 }
               }}
             >
