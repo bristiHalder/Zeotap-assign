@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "https://zeotap-assign-production.up.railway.app/api/:path*"
+    },
+    {
+      "source": "/health",
+      "destination": "https://zeotap-assign-production.up.railway.app/health"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
