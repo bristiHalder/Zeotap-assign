@@ -31,7 +31,7 @@ export const api = {
     request(`/api/v1/workitems/${id}/rca`, { method: 'POST', body: JSON.stringify(data) }),
   getRCA: (id) => request(`/api/v1/workitems/${id}/rca`),
   ingestSignal: (data) =>
-    request('/api/v1/signals', { method: 'POST', body: JSON.stringify(data) }),
+    request('/api/v1/signals/', { method: 'POST', body: JSON.stringify(data) }),
 };
 
 export function createWebSocket() {
