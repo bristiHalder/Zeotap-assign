@@ -1,4 +1,4 @@
-const API_BASE = '';
+const API_BASE = 'https://zeotap-assign-production.up.railway.app';
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -35,7 +35,5 @@ export const api = {
 };
 
 export function createWebSocket() {
-  const host = window.location.host;
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  return new WebSocket(`${protocol}//${host}/api/v1/ws`);
+  return new WebSocket('wss://zeotap-assign-production.up.railway.app/api/v1/ws');
 }
